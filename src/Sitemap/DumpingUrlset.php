@@ -58,8 +58,10 @@ class DumpingUrlset extends Urlset
 
         $streamInfo = stream_get_meta_data($this->bodyFile);
         fclose($this->bodyFile);
-        // removing temporary file
-        unlink($streamInfo['uri']);
+        if (isset($streamInfo['uri'])) {
+            // removing temporary file
+            unlink($streamInfo['uri']);
+        }
 
         if ($gzip) {
             $this->loc .= '.gz';
